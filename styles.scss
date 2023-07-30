@@ -6,13 +6,13 @@ $theme-colors: (
     "RoyalPurpple":#8a2be2,
     "LightBlue":#00ffff,
     "Lime": #32cd32,
-    "MediumGray": #888686
+    "MediumGray": #888686,
 );
     
 
 @function getColor($name){
     @return map.get($theme-colors,$name)
-}
+};
 
 body{
     display: flex;
@@ -23,6 +23,15 @@ body{
     padding:0 8px;
     font-family: 'Tektur', cursive;
     font-weight: bold;
+    .guard_status{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: 546px;
+        p{
+            margin-right: 8px;
+        }
+    }
 }
 
 button{

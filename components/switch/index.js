@@ -4,7 +4,6 @@ class Switch extends HTMLElement {
     super();
     this.shadow = this.attachShadow({mode:'closed'});
     this.TEMPLATE_HTML = '';
-    this.setAttribute('state',window.$MetricsSentinel.state);
     // элемент создан
   };
   
@@ -17,6 +16,7 @@ class Switch extends HTMLElement {
     const template = await window.$MetricsSentinel.getComponent("/components/switch/index.html","switch-template");
     let clone = template.content.cloneNode(true)
     this.shadow.appendChild(clone);
+    window.$MetricsSentinel.initExtension();
   }
   
   disconnectedCallback() {

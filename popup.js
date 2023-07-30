@@ -1,21 +1,38 @@
 class Sentinel {
         constructor(){
             this.state = "is_not_active";
-            this.startGuardButton = document.getElementById("start_guard_btn");
+            this.switch = undefined;
             this.initExtension = this.initExtension.bind(this);
             this.getComponent = this.getComponent.bind(this);
+            this.requestCallback = this.requestCallback.bind(this);
+            this.runRequestsListener = this.runRequestsListener.bind(this);
         }
 
         initExtension(){
-            document.addEventListener("DOMContentLoaded",()=>{
-                this.startGuardButton.addEventListener("click",(e) => {
-                    const state = (this.state === "is_not_active" ? "is_active" : "is_not_active")    
-                    this.state = state; 
-                    e.target.setAttribute("state",state);
-                });
-
+            this.switch = document.getElementsByTagName("custom-switch")[0].shadow.childNodes[3];
+            this.switch.setAttribute("state", this.state); 
+            this.switch.addEventListener("click",(e) => {
+                const state = (this.state === "is_not_active" ? "is_active" : "is_not_active")    
+                this.state = state;
+                this.switch.setAttribute("state", this.state);
             });
         };
+
+        setSentinelStatus(argument = null){
+            console.log(argument);
+        }
+
+        runRequestsListener(){
+            const filter = (a) =>  console.log(a);
+            chrome.webRequest.onBeforeRequest.addListener(
+                this.requestCallback,
+                filter
+            );
+        }
+
+        requestCallback(any){
+            console.log("REQUEST CALLBACK:",any);
+        }
 
         async getComponent(path,elId = null){
             const response = await fetch(path);
@@ -30,12 +47,6 @@ class Sentinel {
                 return result;
             });
         }
-
-        createElemProxy = (el) =>{
-            return new Proxy();
-        } 
-
 }
 
 window.$MetricsSentinel = new Sentinel();
-window.$MetricsSentinel.initExtension();
