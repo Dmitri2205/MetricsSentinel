@@ -1,0 +1,17 @@
+@import url("styles.scss");
+:host > #switch_wraper {
+  display: inline;
+  max-width: 256px;
+  max-height: 32px;
+  border: 1px solid getColor("MediumGray");
+  position: relative;
+}
+:host > #switch_wraper > span {
+  width: 24px;
+  height: 24px;
+  background-color: getColor("MediumGray");
+}
+:host > #switch_wraper ::slotted(span) {
+  position: absolute;
+  right: -12px;
+}/*# sourceMappingURL=style.css.map */
