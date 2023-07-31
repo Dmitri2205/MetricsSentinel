@@ -9,6 +9,15 @@ body {
   font-family: "Tektur", cursive;
   font-weight: bold;
 }
+body .guard_status {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 546px;
+}
+body .guard_status p {
+  margin-right: 8px;
+}
 
 button {
   display: inline-flex;

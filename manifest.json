@@ -12,13 +12,25 @@
     "action": {
         "default_popup":"popup.html"
     },
+    "content_scripts":[
+        {
+            "matches": [ "<all_urls>" ],
+            "js": [ "messaging.js" ]
+        }
+    ],
     "permissions": [
         "scripting",
         "activeTab",
-        "webRequest"
+        "webRequest",
+        "cookies",
+        "sessions",
+        "storage",
+        "pageCapture",
+        "nativeMessaging"
     ],
-    "host_permissions": [
-        "*://*"
-      ],
-    "background":{}
+    "host_permissions": ["*://*.google.com/*"],
+      "background": {
+        "service_worker": "background.js",
+        "type":"module"
+    }
 }

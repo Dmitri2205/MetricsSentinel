@@ -30,9 +30,7 @@ class Switch extends HTMLElement {
   }
   
   attributeChangedCallback(property, oldValue, newValue) {
-    if(oldValue === newValue){
-         this[property] = newValue;
-    }
+    // window.$MetricsSentinel.runRequestsListener();
 }
     
     adoptedCallback() {

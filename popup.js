@@ -1,39 +1,37 @@
 class Sentinel {
         constructor(){
-            this.state = "is_not_active";
             this.switch = undefined;
             this.initExtension = this.initExtension.bind(this);
             this.getComponent = this.getComponent.bind(this);
-            this.requestCallback = this.requestCallback.bind(this);
-            this.runRequestsListener = this.runRequestsListener.bind(this);
+            // this.requestCallback = this.requestCallback.bind(this);
+            this.state = localStorage.getItem("sentinel_state");
+            this.connection = chrome.runtime.connect({name:"SentinelPort"});
+            this.receiveBackgroundMessage = this.receiveBackgroundMessage.bind(this);
         }
 
+        
+        
         initExtension(){
-            this.switch = document.getElementsByTagName("custom-switch")[0].shadow.childNodes[3];
-            this.switch.setAttribute("state", this.state); 
+            this.switch = document.getElementsByTagName("custom-switch")[0];
+            const switchThumb = this.switch.shadow.childNodes[3];
+            
+            this.switch.setAttribute("state",this.state);
+            switchThumb.setAttribute("state",this.state); 
+            
             this.switch.addEventListener("click",(e) => {
-                const state = (this.state === "is_not_active" ? "is_active" : "is_not_active")    
-                this.state = state;
+                const newState = this.state === "is_not_active" ? "is_active" : "is_not_active";
+                this.state = newState;
                 this.switch.setAttribute("state", this.state);
+                switchThumb.setAttribute("state", this.state);
+                localStorage.setItem("sentinel_state",this.state);
+                this.connection.postMessage({msg:"HI"});
             });
         };
-
-        setSentinelStatus(argument = null){
-            console.log(argument);
+        
+        receiveBackgroundMessage(arg){
+            console.log(arg)
         }
-
-        runRequestsListener(){
-            const filter = (a) =>  console.log(a);
-            chrome.webRequest.onBeforeRequest.addListener(
-                this.requestCallback,
-                filter
-            );
-        }
-
-        requestCallback(any){
-            console.log("REQUEST CALLBACK:",any);
-        }
-
+        
         async getComponent(path,elId = null){
             const response = await fetch(path);
             const rawHtml = response.text();
@@ -47,6 +45,10 @@ class Sentinel {
                 return result;
             });
         }
-}
+        
+        _onPropertyChanged(property){
+            console.log("Property changed",property)
+        }
+    }
 
-window.$MetricsSentinel = new Sentinel();
+    window.$MetricsSentinel = new Sentinel();
