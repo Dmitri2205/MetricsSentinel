@@ -24,7 +24,7 @@ class Sentinel {
                 this.switch.setAttribute("state", this.state);
                 switchThumb.setAttribute("state", this.state);
                 localStorage.setItem("sentinel_state",this.state);
-                this.connection.postMessage({msg:"HI"});
+                this.connection.postMessage(newState);
             });
         };
         
