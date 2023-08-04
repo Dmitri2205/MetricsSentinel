@@ -15,7 +15,7 @@
     "content_scripts":[
         {
             "matches": [ "<all_urls>" ],
-            "js": [ "messaging.js" ]
+            "js": [ "js/content.js" ]
         }
     ],
     "permissions": [
@@ -30,7 +30,7 @@
     ],
     "host_permissions": ["*://*.google.com/*"],
       "background": {
-        "service_worker": "background.js",
+        "service_worker": "js/background.js",
         "type":"module"
     }
 }
