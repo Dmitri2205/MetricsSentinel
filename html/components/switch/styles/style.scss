@@ -1,25 +1,24 @@
-@import '../../../styles.scss';
+@import "../../../../styles/styles.scss";
 
-
-#switch{
-    display: inline-flex;
-    align-items: center;
-    width: 48px;
-    height: 22px;
-    padding: 2px;
-    border: 2px solid getColor("LightBlue");
-    border-radius: 24px;
-    background-color: darken(getColor("RoyalPurpple"),10%);
-    #switch_thumb{
+    #switch{
         display: inline-flex;
-        width: 22px;
+        align-items: center;
+        width: 48px;
         height: 22px;
-        background-color: getColor("LightBlue");
-        transition: transform .3s ease;
-        border-radius: 50%;
-        transform: translateX(0);
-    }
-    &[state="is_active"]>#switch_thumb{
-        transform: translateX(48px - 22px);
-    }
-}   
+        padding: 2px;
+        border: 2px solid getColor("LightBlue");
+        border-radius: 24px;
+        background-color: darken(getColor("RoyalPurpple"),10%);
+        &.is_active>#switch_thumb{
+            transform: translateX(48px - 22px);
+        }   
+        #switch_thumb{
+            display: inline-flex;
+            width: 22px;
+            height: 22px;
+            background-color: getColor("LightBlue");
+            transition: transform .3s ease;
+            border-radius: 50%;
+            transform: translateX(0);
+        }
+}

@@ -2,8 +2,9 @@ class Switch extends HTMLElement {
   
   constructor() {
     super();
-    this.shadow = this.attachShadow({mode:'closed'});
+    this.shadow = this.attachShadow({mode:'open'});
     this.TEMPLATE_HTML = '';
+    this.switchEl = undefined;
     // элемент создан
   };
   
@@ -13,10 +14,14 @@ class Switch extends HTMLElement {
   }
   
   async connectedCallback() {
-    const template = await window.$MetricsSentinel.getComponent("/components/switch/index.html","switch-template");
+    const template = await window?.$MetricsSentinel?.getComponent("components/switch/index.html","switch-template");
     let clone = template.content.cloneNode(true)
     this.shadow.appendChild(clone);
-    window.$MetricsSentinel.initExtension();
+    this.switchEl = this.shadow.querySelector("#switch");
+    const state = this.getAttribute("state");
+    if(state === "is_active"){
+      this.switchEl.classList.add("is_active");
+    }
   }
   
   disconnectedCallback() {
@@ -30,7 +35,10 @@ class Switch extends HTMLElement {
   }
   
   attributeChangedCallback(property, oldValue, newValue) {
-    // window.$MetricsSentinel.runRequestsListener();
+    console.log(property,oldValue,newValue); 
+      newValue ===  "is_active" ? 
+      this.switchEl?.classList.add("is_active") :
+      this.switchEl?.classList.remove("is_active") ;
 }
     
     adoptedCallback() {
