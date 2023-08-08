@@ -1,9 +1,23 @@
 @import 'https://fonts.googleapis.com/css2?family=Tektur&display=swap';
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 4px;
+  background-color: #fc7878;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #923ee1;
+}
+
 body {
   display: flex;
   flex-direction: column;
   width: 534px;
-  background-color: #8a2be2;
+  background-color: #923ee1;
   color: #32cd32;
   padding: 0 8px;
   font-family: "Tektur", cursive;
@@ -14,6 +28,7 @@ body .guard_status {
   align-items: center;
   width: 100%;
   max-width: 546px;
+  position: sticky;
 }
 body .guard_status p {
   margin-right: 8px;
@@ -35,5 +50,40 @@ button {
   font-size: 18px;
   font-weight: 700;
   background: linear-gradient(332deg, rgb(0, 255, 255) 0%, rgba(138, 43, 226, 0.706320028) 100%);
-  color: #8a2be2;
+  color: #923ee1;
+}
+
+#requests_list {
+  display: inline-flex;
+  width: 100%;
+  height: 300px;
+  flex-direction: column;
+  padding: 0 4px 0 0;
+  margin: 0;
+  list-style-type: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+#requests_list > li {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  color: #fff8dc;
+  margin-bottom: 8px;
+  border: 1px dashed black;
+  border-radius: 8px;
+  background-color: #fc7878;
+}
+#requests_list > li span {
+  display: inline-flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 2px 4px;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+#requests_list > li span:not(:last-of-type) {
+  border-bottom: 1px dashed #888686;
 }/*# sourceMappingURL=styles.css.map */
